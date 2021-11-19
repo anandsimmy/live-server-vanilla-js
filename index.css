@@ -1,0 +1,21 @@
+.star-wrapper {
+    display: flex;
+    padding: 20px;
+    width: fit-content;
+    background-color: black;
+    cursor: pointer;
+}
+
+.star-item {
+    padding-inline: 5px;
+}
+
+.star-item:before {
+    color: white;
+    font-size: 24px;
+}
+
+.hovered:before,
+.selected:before {
+    color: goldenrod;
+} 
