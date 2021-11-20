@@ -1,91 +1,73 @@
-const starItems = document.getElementsByClassName('star-item');
-
-function mouseOverHandler(index, node) {
-  for (let i = 0; i <= index; i++) {
-    if (!starItems[i].classList.contains('hovered')) {
-      starItems[i].classList.add('hovered');
-    }
-  }
-}
-
-function mouseOutHandler(index, node) {
-  for (let i = 0; i <= index; i++) {
-    if (starItems[i].classList.contains('hovered')) {
-      starItems[i].classList.remove('hovered');
-    }
-  }
-}
-
-function clickHandler(index, node, event) {
-  event.stopPropagation();
-  for (let i = 0; i < starItems.length; i++) {
-    if (i <= index && !starItems[i].classList.contains('selected')) {
-      starItems[i].classList.add('selected');
-    } else if (i > index) {
-      starItems[i].classList.remove('selected');
-    }
-  }
-}
-
-function resetHandler(event, node) {
-  for (let i = 0; i < starItems.length; i++) {
-    starItems[i].classList.remove('selected');
-  }
-}
-
-function Node(val) {
-  this.val = val;
-  this.next = null;
-}
-
-function myLinkedList() {
-  this.head = null;
-}
-
-myLinkedList.prototype.add = function (val) {
-  const newNode = new Node(val);
-  if (!this.head) {
-    this.head = newNode;
-    return newNode;
-  }
-  let node = this.head;
-  while (node.next) {
-    node = node.next;
-  }
-  node.next = newNode;
-  return newNode;
+let a = {
+  name: 'Jon',
+  fname: {
+    title: 'Got',
+    hello: [3, 4, { 1: 2 }],
+  },
+  arr: [1, 2, {}, [5, 6]],
 };
 
-myLinkedList.prototype.remove = function (val) {
-  if (this.head) {
-    if (!this.head.next) {
-      this.head = null;
-      return this;
-    }
-    let currentNode = this.head;
-    let fartherNode = this.head.next.next;
-    while (fartherNode) {
-      fartherNode = fartherNode.next;
-      currentNode = currentNode.next;
-    }
-    currentNode.next = null;
+//deepclone implementation
+const deepClone = (param) => {
+  if (Array.isArray(param)) {
+    const newArr = [];
+    param.forEach((item, index) => {
+      if (Array.isArray(item) || typeof item === 'object') {
+        newArr[index] = deepClone(item);
+      } else {
+        newArr[index] = item;
+      }
+    });
+    return newArr;
+  } else if (typeof param === 'object') {
+    const newObj = {};
+    Object.keys(param).forEach((key) => {
+      if (Array.isArray(param[key]) || typeof param[key] === 'object') {
+        newObj[key] = deepClone(param[key]);
+      } else {
+        newObj[key] = param[key];
+      }
+    });
+    return newObj;
   }
-  return this;
 };
 
-const newList = new myLinkedList();
-newList.add(4);
-newList.add(2);
-newList.add(6);
-newList.add(1);
-newList.add(8);
+let b = deepClone(a);
 
-console.log(newList);
+const person = {
+  firstName: '',
+  lastName: '',
+  setName(name) {
+    const self = this;
+    function splitName(n) {
+      self.firstName = n.split(' ')[0];
+      self.lastName = n.split(' ')[1];
+    }
+    splitName(name);
+  },
+};
 
-const starWrapper = document.querySelector('.star-wrapper');
+person.setName('john doe');
 
-console.log(starWrapper);
+function Counter() {
+  let count = 1;
+  this.increment = function () {
+    count++;
+    console.log(count);
+  };
+  this.decrement = function () {
+    count--;
+    console.log(count);
+  };
+}
 
-starWrapper.addEventListener('click', function (e) {
-  console.log(this, e.target);
-});
+const c = new Counter();
+const d = new Counter();
+
+console.log(c);
+c.increment();
+c.increment();
+c.increment();
+c.decrement();
+c.increment();
+d.increment();
