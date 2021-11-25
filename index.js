@@ -66,8 +66,6 @@ const d = new Counter();
 
 console.log(c);
 c.increment();
-c.increment();
-c.increment();
 c.decrement();
 c.increment();
 d.increment();
