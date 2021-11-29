@@ -50,7 +50,6 @@ const person = {
 person.setName('john doe');
 
 function Counter() {
-  let count = 1;
   this.increment = function () {
     count++;
     console.log(count);
