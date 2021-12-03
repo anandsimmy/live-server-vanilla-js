@@ -1,21 +1,25 @@
-.star-wrapper {
-    display: flex;
-    padding: 20px;
-    width: fit-content;
-    background-color: black;
-    cursor: pointer;
+.circle {
+    height: 100px;
+    width: 100px;
+    background-color: aqua;
+    border-radius: 50%;
+    animation: rotate 1s linear infinite;
 }
 
-.star-item {
-    padding-inline: 5px;
+.loader::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: white;
+    position: absolute;
+    top: 15px;
+    left: 30px;
 }
 
-.star-item:before {
-    color: white;
-    font-size: 24px;
-}
+@keyframes rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 
-.hovered:before,
-.selected:before {
-    color: goldenrod;
-} 
