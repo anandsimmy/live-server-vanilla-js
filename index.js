@@ -1,8 +1,15 @@
-const outerCircle = documetnt.getElementById('');
-const innerCircle = documetnt.getElementById('inner-circle');
+function test() {
+  var c = 10;
 
-function rotateInner() {
-  const { top, left } = innerCircle.getBoundingClientRect();
+  function foo(a) {
+    let b = 8;
+    const d = 10;
+    return function bar() {
+      return a + d + c;
+    };
+  }
+
+  const func = foo(7);
+  func();
 }
-
-setInterval(() => rotateInner(), 100);
+test();
