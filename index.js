@@ -1,15 +1,29 @@
-function test() {
-  var c = 10;
+// "abc" => abc,acb,bac,bca,cab,cba
 
-  function foo(a) {
-    let b = 8;
-    const d = 10;
-    return function bar() {
-      return a + d + c;
-    };
+// "bc" => bc, cb
+
+const permutations = (str) => {
+  if (!str) {
+    return [];
+  }
+  if (str.length === 1) {
+    return [str];
   }
 
-  const func = foo(7);
-  func();
-}
-test();
+  let result = [];
+  for (let i = 0; i < str.length; i++) {
+    const strArr = str.split('');
+    const currentLetter = strArr[i];
+    const remainingLetters = permutations(
+      strArr.filter((item, index) => index !== i).join('')
+    );
+    for (let i = 0; i < remainingLetters.length; i++) {
+      const newLetter = currentLetter + remainingLetters[i];
+      result.push(newLetter);
+    }
+  }
+
+  return result;
+};
+
+console.log(permutations(null));
