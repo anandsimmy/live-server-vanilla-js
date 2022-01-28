@@ -26,4 +26,32 @@ const permutations = (str) => {
   return result;
 };
 
-console.log(permutations(null));
+console.log(permutations('abc'));
+
+class Employee {
+  constructor(id, name) {
+    this.id = id;
+    this.name = name;
+  }
+
+  getId() {
+    return this.id;
+  }
+
+  getName() {
+    return this.name;
+  }
+}
+
+function Employee(id, name) {
+  this.id = id;
+  this.name = name;
+}
+
+Employee.prototype.getId = function () {
+  return this.id;
+};
+
+Employee.prototype.getName = function () {
+  return this.name;
+};
