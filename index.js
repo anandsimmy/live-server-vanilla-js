@@ -26,32 +26,49 @@ const permutations = (str) => {
   return result;
 };
 
-console.log(permutations('abc'));
+function getData(data) {
+  console.log('input', data);
+  const input = data.split('\n');
 
-class Employee {
-  constructor(id, name) {
-    this.id = id;
-    this.name = name;
-  }
+  const secondLine = input[1].split(' ');
+  const thirdLine = input[2].split(' ');
 
-  getId() {
-    return this.id;
-  }
-
-  getName() {
-    return this.name;
+  const arr = secondLine || [1, 0, 3, 6, 2, 5];
+  const min = thirdLine[0] || 1;
+  const max = thirdLine[1] || 3;
+  const fourthLine = Number(input[3]);
+  let i = 0;
+  while (i < fourthLine) {
+    const day = Number(input[4 + i]);
+    console.log(getPeopleCount(arr, min, max, day));
+    i++;
   }
 }
 
-function Employee(id, name) {
-  this.id = id;
-  this.name = name;
+function getPeopleCount(arr, min, max, day) {
+  const minRange = day - max - 1;
+  const maxRange = day - min - 1;
+  let ranges = [];
+  if (maxRange < 0) {
+    return 0;
+  } else if (minRange < 0) {
+    ranges = [0, maxRange];
+  } else {
+    ranges = [minRange, maxRange];
+  }
+  return arr
+    .slice(ranges[0], ranges[1] + 1)
+    .reduce((acc, item) => acc + Number(item), 0);
 }
 
-Employee.prototype.getId = function () {
-  return this.id;
-};
+process.stdin.resume();
+process.stdin.setEncoding('utf-8');
+var std_input = '';
+process.stdin.on('data', function (input) {
+  std_input += input;
+});
+process.stdin.on('end', function () {
+  getData(std_input);
+});
 
-Employee.prototype.getName = function () {
-  return this.name;
-};
+// getData('6\n1 0 3 6 2 5\n1 3\n4\n1\n2\n6\n4');
